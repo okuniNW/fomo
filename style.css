@@ -1,1 +1,903 @@
 
+/* ============================================================
+   FOMO INK — style.css
+   Design System Terkunci · Ungu #5b21b6 · Krem #fcfaf5
+   Signature: dashed 2px #d8cded · Ease: cubic-bezier(.22,1,.36,1)
+   ============================================================ */
+
+/* ---------- 1. DESIGN TOKENS ---------- */
+:root {
+  /* Warna inti (TERKUNCI) */
+  --purple: #5b21b6;
+  --purple-bright: #7c3aed;
+  --grad: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  --cream: #fcfaf5;
+  --gold: #ffeb5b;
+  --cyan: #a8e5e5;
+  --cyan-deep: #0e7490;      /* turunan cyan agar teks terbaca */
+  --ink: #241a33;
+  --ink-soft: #5b4b78;
+  --dash: #d8cded;
+
+  /* Font */
+  --font-head: "Bricolage Grotesque", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+
+  /* Radius */
+  --r-xs: 4px; --r-sm: 6px; --r-md: 12px;
+  --r-lg: 16px; --r-xl: 20px; --r-full: 999px;
+
+  /* Motion */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --t-fast: 150ms; --t-mid: 220ms; --t-slow: 300ms;
+
+  /* Shadow ungu */
+  --shadow-sm: 0 2px 8px rgba(91, 33, 182, .08);
+  --shadow-md: 0 8px 24px -8px rgba(91, 33, 182, .25);
+  --shadow-xl: 0 24px 48px -24px rgba(91, 33, 182, .35),
+               0 2px 8px rgba(91, 33, 182, .08);
+}
+
+/* ---------- 2. RESET & BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+::selection { background: var(--purple); color: #fff; }
+
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.1; }
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- 3. LAYOUT ---------- */
+.container {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section { padding-block: 80px; }
+
+.section__title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 48px;
+}
+
+.section__title .grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- 4. TOMBOL PILL ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: var(--r-full);
+  font-weight: 600;
+  font-size: .95rem;
+  transition: transform var(--t-fast) var(--ease),
+              box-shadow var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease);
+}
+
+.btn--primary {
+  background: var(--grad);
+  background-size: 150% 150%;
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+.btn--primary:hover {
+  background-position: 100% 100%;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+.btn--primary .btn__arrow { transition: transform var(--t-fast) var(--ease); }
+.btn--primary:hover .btn__arrow { transform: translateX(4px); }
+
+.btn--ghost {
+  border: 2px dashed var(--dash);
+  color: var(--purple);
+  background: transparent;
+}
+.btn--ghost:hover {
+  border-style: solid;
+  border-color: var(--purple-bright);
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.btn--sm { padding: 8px 18px; font-size: .85rem; }
+.btn--lg { padding: 16px 34px; font-size: 1.05rem; }
+
+.btn.is-disabled,
+.btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ---------- 5. BADGE STATUS ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.badge--new     { background: var(--gold); color: var(--ink); }
+.badge--popular { background: var(--grad); color: #fff; }
+.badge--soon    { background: transparent; border: 2px solid var(--cyan); color: var(--cyan-deep); }
+.badge--live    { background: transparent; border: 2px solid var(--cyan); color: var(--cyan-deep); }
+
+/* ---------- 6. FLOATING CHIPS ---------- */
+.chip {
+  position: absolute;
+  padding: 8px 16px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .8rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  animation: float 3.5s ease-in-out infinite alternate;
+  z-index: 3;
+}
+.chip--gold   { background: var(--gold); color: var(--ink); }
+.chip--purple { background: var(--grad); color: #fff; }
+.chip--cyan   { background: var(--cream); border: 2px solid var(--cyan); color: var(--cyan-deep); }
+.chip--cyan .chip__check { color: var(--purple); }
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-6px); }
+}
+.chip:nth-child(2) { animation-delay: .6s; animation-duration: 4.2s; }
+.chip:nth-child(3) { animation-delay: 1.1s; animation-duration: 3.8s; }
+
+/* ---------- 7. HEADER STICKY ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(252, 250, 245, .88);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px dashed var(--dash);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo__mark {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  font-size: 1.4rem;
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-md);
+}
+.logo__text { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; letter-spacing: .02em; }
+
+.site-nav {
+  display: flex;
+  gap: 4px;
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-full);
+  padding: 4px;
+}
+.site-nav__link {
+  padding: 7px 18px;
+  border-radius: var(--r-full);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.site-nav__link:hover { color: var(--purple); }
+.site-nav__link--active { background: var(--grad); color: #fff; }
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+
+.lang-select {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  padding: 9px 12px;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-full);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* ---------- 8. HERO SPLIT (55/45) ---------- */
+.hero { position: relative; overflow: hidden; padding-block: 72px 64px; }
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Ghost text "FOMO" — outline raksasa, terpotong tepi kiri */
+.ghost-text {
+  position: absolute;
+  top: -30px;
+  left: -4%;
+  z-index: 0;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(9rem, 30vw, 22rem);
+  line-height: .8;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(91, 33, 182, .1);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero__badge { margin-bottom: 20px; }
+
+.hero__title {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.hero__title1 {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--purple);
+}
+.hero__title2 { display: block; }
+.hero__title2 .grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__sub {
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  max-width: 46ch;
+  margin-bottom: 28px;
+}
+
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+
+.hero__micro { font-family: var(--font-mono); font-size: .72rem; color: var(--ink-soft); }
+
+/* Glow radial lembut di belakang kartu */
+.hero__visual { position: relative; display: grid; place-items: center; }
+.hero__visual::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle, rgba(124, 58, 237, .12) 0%, transparent 65%);
+  z-index: 0;
+}
+
+/* ---------- 9. KARTU NFT "INK PASSPORT" ---------- */
+.card-passport {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 380px);
+  aspect-ratio: 3 / 4;
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-xl);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease);
+}
+.card-passport:hover {
+  transform: perspective(900px) rotateX(1.5deg) rotateY(-2deg) scale(1.01);
+  box-shadow: 0 32px 56px -24px rgba(91, 33, 182, .45);
+}
+
+.card-passport__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-passport__brand {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: .7rem; font-weight: 700; letter-spacing: .14em;
+}
+
+.card-passport__arena { flex: 1; } /* img-slot di dalamnya */
+
+.card-passport__name {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.card-passport__name h3 { font-size: 1.05rem; }
+.rank-pill {
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  background: rgba(168, 229, 229, .3);
+  border: 2px solid var(--cyan);
+  color: var(--cyan-deep);
+  font-family: var(--font-mono);
+  font-size: .62rem; font-weight: 700; letter-spacing: .08em;
+  white-space: nowrap;
+}
+
+.card-passport__xp {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-mono); font-size: .72rem; color: var(--ink-soft);
+}
+
+.card-passport__footer {
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: .62rem;
+  color: var(--ink-soft);
+  border-top: 2px dashed var(--dash);
+  padding-top: 10px;
+}
+
+/* Posisi chips di kartu (menembus tepi) */
+.card-passport .chip--purple { top: -14px; right: -18px; }
+.card-passport .chip--gold   { left: -26px; top: 42%; }
+.card-passport .chip--cyan   { bottom: 60px; right: -20px; }
+
+/* Tali tambat dashed dari kartu ke chip emas */
+.card-passport::after {
+  content: "";
+  position: absolute;
+  left: -22px; top: 46%;
+  width: 24px;
+  border-top: 2px dashed var(--dash);
+  transform: rotate(8deg);
+}
+
+/* ---------- 10. IMG-SLOT (MOCKUP PLACEHOLDER) ---------- */
+.img-slot {
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  background: #fdfcf9;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.img-slot:hover { border-color: var(--purple-bright); }
+
+.img-slot__emoji { font-size: 2.6rem; }
+.img-slot__label {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+.img-slot--square  { aspect-ratio: 1 / 1; }
+.img-slot--wide    { aspect-ratio: 3 / 1; }
+.img-slot--landscape { aspect-ratio: 16 / 10; }
+.img-slot--icon {
+  width: 48px; height: 48px;
+  border-radius: var(--r-sm);
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.img-slot--full { width: 100%; height: 100%; }
+
+/* ---------- 11. STATS STRIP ---------- */
+.stat-strip {
+  border-block: 2px dashed var(--dash);
+  background: #fff;
+}
+.stat-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat {
+  padding: 32px 20px;
+  text-align: center;
+  border-left: 2px dashed var(--dash);
+}
+.stat:first-child { border-left: none; }
+.stat__value {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  color: var(--purple);
+}
+.stat__label { margin-top: 6px; }
+
+/* ---------- 12. 3 LANGKAH (HOW IT WORKS) ---------- */
+.steps__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.step {
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-xl);
+  padding: 32px 26px;
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease);
+}
+.step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+.step__num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 3.4rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(91, 33, 182, .25);
+  margin-bottom: 14px;
+}
+.step__title { font-size: 1.25rem; margin-bottom: 8px; }
+.step__desc { color: var(--ink-soft); font-size: .95rem; }
+
+/* ---------- 13. BENTO FITUR ---------- */
+.bento__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.bento__card {
+  position: relative;
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-xl);
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease);
+}
+.bento__card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+.bento__card .badge { position: absolute; top: 18px; right: 18px; }
+.bento__icon { font-size: 2.2rem; }
+.bento__title { font-size: 1.25rem; }
+.bento__desc { color: var(--ink-soft); font-size: .95rem; }
+.bento__card--highlight { border-style: solid; border-color: var(--purple-bright); }
+
+/* ---------- 14. CTA TREASURY ---------- */
+.treasury-banner {
+  background: var(--grad);
+  border-radius: var(--r-xl);
+  padding: 56px 40px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  box-shadow: var(--shadow-xl);
+}
+.treasury-banner h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 8px; }
+.treasury-banner p { color: rgba(255, 255, 255, .8); max-width: 52ch; }
+.treasury-banner .btn--primary {
+  background: var(--gold);
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.treasury-banner .btn--primary:hover { transform: translateY(-2px) scale(1.02); }
+
+/* ---------- 15. FEE STRIP ---------- */
+.fee-strip {
+  border-block: 2px dashed var(--dash);
+  background: rgba(124, 58, 237, .05);
+  padding: 20px 24px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  color: var(--purple);
+}
+
+/* ---------- 16. FOOTER (PREMIUM · GELAP) ---------- */
+.site-footer {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 64px 0 32px;
+  position: relative;
+  overflow: hidden;
+}
+.site-footer .ghost-text { -webkit-text-stroke-color: rgba(252, 250, 245, .06); top: auto; bottom: -60px; }
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer__brand p { color: rgba(252, 250, 245, .6); font-size: .9rem; max-width: 34ch; margin-top: 12px; }
+.footer__col h4 {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 14px;
+}
+.footer__col a {
+  display: block;
+  padding-block: 5px;
+  color: rgba(252, 250, 245, .75);
+  font-size: .92rem;
+  transition: color var(--t-fast) var(--ease);
+}
+.footer__col a:hover { color: var(--gold); }
+
+.footer__bottom {
+  border-top: 2px dashed rgba(216, 205, 237, .25);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: rgba(252, 250, 245, .5);
+}
+
+/* ============================================================
+   HALAMAN APP (app.html)
+   ============================================================ */
+
+/* ---------- 17. TITLE STRIP DASHBOARD ---------- */
+.dashboard-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-block: 40px 28px;
+}
+.dashboard-title h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+
+.points-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-full);
+  padding: 10px 20px;
+  box-shadow: var(--shadow-sm);
+}
+.points-counter__value {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--purple);
+}
+.points-counter.is-bump .points-counter__value { animation: bump .4s var(--ease); }
+@keyframes bump {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); color: var(--purple-bright); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 18. GRID APP (40/60) ---------- */
+.app-grid {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 24px;
+  padding-bottom: 80px;
+}
+
+.panel {
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---------- 19. PASSPORT PANEL ---------- */
+.wallet-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--cream);
+  border-radius: var(--r-lg);
+  border: 2px dashed var(--dash);
+}
+.wallet-card__avatar {
+  width: 44px; height: 44px;
+  border-radius: var(--r-full);
+  background: var(--grad);
+  display: grid; place-items: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.wallet-card__addr {
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  color: var(--ink-soft);
+}
+
+.status-pill {
+  margin-left: auto;
+  padding: 5px 12px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+.status-pill--connected { background: var(--cyan); color: var(--ink); }
+.status-pill--disconnected { border: 2px dashed var(--dash); color: var(--ink-soft); }
+
+.identity { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.identity h3 { font-size: 1.2rem; }
+
+.level-block__top { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.level-num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 2.4rem;
+  color: var(--purple);
+}
+.tier-name {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.level-hint { margin-top: 8px; font-family: var(--font-mono); font-size: .68rem; color: var(--ink-soft); }
+
+/* ---------- 20. PROGRESS BAR (XP & POOL) ---------- */
+.progress {
+  height: 12px;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-full);
+  background: #fff;
+  overflow: hidden;
+}
+.progress__fill {
+  height: 100%;
+  background: var(--grad);
+  border-radius: var(--r-full);
+  width: 0;
+  transition: width .8s var(--ease);
+}
+.progress__fill--gold { background: linear-gradient(90deg, #ffeb5b, #ffd400); }
+.progress__fill.is-filled { /* width diisi via JS/inline style */ }
+
+/* ---------- 21. MILESTONE DOTS (Lv.1→10) ---------- */
+.milestone-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.mdot {
+  width: 12px; height: 12px;
+  border-radius: var(--r-full);
+  border: 2px dashed var(--cyan);
+  background: transparent;
+  transition: transform var(--t-fast) var(--ease);
+  cursor: help;
+}
+.mdot:hover { transform: scale(1.3); }
+.mdot--active { background: var(--gold); border: 2px solid var(--gold); }
+.mdot--done { background: var(--cyan); border-style: solid; }
+
+/* ---------- 22. UPLOAD AVATAR ---------- */
+.upload-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.upload-block__note {
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+
+/* ---------- 23. QUEST CARD ---------- */
+.quest-card {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  background: #fff;
+  border: 2px dashed var(--dash);
+  border-radius: var(--r-xl);
+  padding: 22px;
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease), opacity var(--t-mid) var(--ease);
+}
+.quest-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.quest-card--dim { opacity: .5; pointer-events: none; }
+.quest-card--claimed { opacity: .65; border-style: solid; }
+
+.quest-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.quest-card__title { font-size: 1.1rem; }
+.quest-card__desc { color: var(--ink-soft); font-size: .9rem; margin-block: 6px 12px; }
+
+.quest-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.quest-card__progress { flex: 1; min-width: 120px; }
+
+.quest-card__reward {
+  padding: 5px 14px;
+  border-radius: var(--r-full);
+  background: var(--gold);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.quest-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.quest-card__claimed-note {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--ink-soft);
+}
+.fee-note {
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  color: var(--ink-soft);
+}
+
+/* Matriks pill status quest */
+.status-pill--available { background: rgba(168, 229, 229, .25); border: 2px solid var(--cyan); color: var(--cyan-deep); }
+.status-pill--progress  { background: var(--gold); color: var(--ink); }
+.status-pill--complete  { background: var(--grad); color: #fff; }
+.status-pill--claimed   { border: 2px dashed var(--dash); color: var(--ink-soft); background: transparent; }
+
+/* Pulse CTA saat quest Complete */
+.btn--pulse { animation: pulse 1.6s var(--ease) infinite; }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, .4); }
+  50%      { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
+}
+
+/* ---------- 24. CLAIM STRIP (TREASURY) ---------- */
+.claim-strip {
+  grid-column: 1 / -1;
+  background: var(--grad);
+  border-radius: var(--r-xl);
+  padding: 28px 32px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-xl);
+}
+.claim-strip__info h3 { font-size: 1.3rem; margin-bottom: 10px; }
+.claim-strip__pool { display: flex; align-items: center; gap: 12px; max-width: 320px; }
+.claim-strip__pool .progress { flex: 1; background: rgba(255, 255, 255, .15); border-color: rgba(255, 255, 255, .3); }
+.claim-strip__pool .mono { color: rgba(255, 255, 255, .8); }
+
+.claim-pill {
+  padding: 12px 26px;
+  border-radius: var(--r-full);
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  transition: transform var(--t-fast) var(--ease);
+}
+.claim-pill:hover { transform: translateY(-2px); }
+.claim-pill.is-locked {
+  background: transparent;
+  border: 2px dashed rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, .7);
+  cursor: not-allowed;
+}
+
+.claim-strip__micro {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--cyan);
+}
+
+/* ---------- 25. REVEAL ANIMASI (dipicu JS) ---------- */
+/* tanpa JS: konten TETAP tampil normal — hanya saat .reveal
+   ditambahkan JS maka animasi berjalan */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- 26. RESPONSIVE ---------- */
+@media (max-width: 960px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero__content { order: 1; }
+  .hero__visual { order: 2; }
+  .app-grid { grid-template-columns: 1fr; }
+  .steps__grid, .bento__grid { grid-template-columns: 1fr 1fr; }
+  .stat-strip__grid { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(3) { border-left: none; }
+  .stat:nth-child(n+3) { border-top: 2px dashed var(--dash); }
+  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .treasury-banner { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 640px) {
+  .section { padding-block: 56px; }
+  .site-nav { display: none; } /* nav mobile sederhana: logo + connect */
+  .steps__grid, .bento__grid { grid-template-columns: 1fr; }
+  .quest-card { grid-template-columns: 40px 1fr; padding: 18px; }
+  .card-passport .chip--gold { left: -10px; }
+  .card-passport .chip--purple, .card-passport .chip--cyan { right: -8px; }
+  .footer__bottom { flex-direction: column; }
+}
+
+/* ---------- 27. AKSESIBILITAS: REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
