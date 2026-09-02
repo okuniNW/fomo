@@ -4,222 +4,262 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FOMO INK — Don't FOMO. Conquer the Ink Ocean.</title>
-  <meta name="description" content="GameFi × DeFi on Ink L2. Complete on-chain quests, evolve your Kraken, claim from the treasury.">
+  <meta name="description" content="GameFi × DeFi on Ink L2. Complete on-chain quests, feed your Kraken, claim your slice of the treasury.">
+  <meta name="theme-color" content="#5b21b6">
+  <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- Favicon: ganti ke assets/favicon.png saat sudah diupload -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐙</text></svg>">
-
-  <!-- Fonts -->
+  <!-- Google Fonts: Bricolage Grotesque + Inter + Roboto Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- PATCH header mobile (nanti boleh dipindah ke style.css) -->
+  <style>
+    @media (max-width: 640px){
+      .header-badge { display: none; }
+      .logo__text   { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ============ 1. HEADER ============ -->
-  <header class="header" id="header">
-    <div class="container header__inner">
-      <a href="index.html" class="brand">
-        <span class="brand__mark img-slot img-slot--logo"><span class="img-slot__emoji">🐙</span><span class="img-slot__label">[IMG: logo-mark]</span></span>
-        <span class="brand__word">FOMO <span class="brand__ink">INK</span></span>
+  <!-- ================= 1. HEADER STICKY ================= -->
+  <header class="site-header" id="header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html">
+        <span class="logo__mark" aria-hidden="true">🐙</span>
+        <span class="logo__text">FOMO INK</span>
       </a>
-      <span class="badge badge--live" data-i18n="header.chain">⚡ Ink L2</span>
 
-      <nav class="nav-pill" aria-label="Main">
-        <a href="index.html" class="nav-pill__link nav-pill__link--active" data-i18n="nav.home">Home</a>
-        <a href="index.html#how" class="nav-pill__link" data-i18n="nav.how">How It Works</a>
-        <a href="index.html#features" class="nav-pill__link" data-i18n="nav.features">Features</a>
-        <a href="app.html" class="nav-pill__link" data-i18n="nav.app">Quest App</a>
+      <span class="badge badge--live header-badge">⛓ INK L2</span>
+
+      <nav class="site-nav" aria-label="Main">
+        <a class="site-nav__link site-nav__link--active" href="index.html" data-i18n="nav.home">Home</a>
+        <a class="site-nav__link" href="app.html" data-i18n="nav.app">Quest App</a>
       </nav>
 
-      <div class="header__right">
-        <!-- Dropdown bahasa (custom, diisi oleh i18n.js) -->
-        <div class="lang" id="lang-dropdown">
-          <button class="lang__btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false">
-            <span id="lang-current-flag">🇬🇧</span><span id="lang-current-code">EN</span><span class="lang__caret">▾</span>
-          </button>
-          <ul class="lang__menu" id="lang-menu" role="listbox">
-            <li role="option" data-lang="en" class="lang__item lang__item--active">🇬🇧 EN</li>
-            <li role="option" data-lang="id" class="lang__item">🇮🇩 ID</li>
-            <li role="option" data-lang="ptbr" class="lang__item">🇧🇷 PT-BR</li>
-            <li role="option" data-lang="zh" class="lang__item">🇨🇳 ZH</li>
-            <li role="option" data-lang="ko" class="lang__item">🇰🇷 KO</li>
-          </ul>
-        </div>
-        <button class="btn btn--primary" id="connect-btn" data-i18n="header.connect">Connect Wallet</button>
+      <div class="header-actions">
+        <select class="lang-select" id="langSelect" aria-label="Language">
+          <option value="en">🇬🇧 EN</option>
+          <option value="id">🇮🇩 ID</option>
+          <option value="ptbr">🇧🇷 PT-BR</option>
+          <option value="zh">🇨🇳 ZH</option>
+          <option value="ko">🇰🇷 KO</option>
+        </select>
+        <a class="btn btn--primary btn--sm" href="app.html" data-i18n="nav.connect">Connect</a>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- ============ 2. HERO SPLIT ============ -->
-    <section class="hero section" id="hero">
+  <!-- ================= 2. HERO SPLIT ================= -->
+  <section class="hero" id="hero">
+    <div class="container">
       <span class="ghost-text" aria-hidden="true">FOMO</span>
-      <div class="container hero__grid">
 
-        <!-- Kiri: copy + CTA -->
-        <div class="hero__left">
-          <span class="badge badge--eyebrow" data-i18n="hero.badge">⚓ LIVE ON INK L2</span>
+      <div class="hero__grid">
+        <!-- Zona kiri 55% -->
+        <div class="hero__content">
+          <span class="badge badge--live hero__badge">
+            ⚓ <span data-i18n="hero.badge">LIVE ON INK L2</span>
+          </span>
+
           <h1 class="hero__title">
             <span class="hero__title1" data-i18n="hero.title1">Don't FOMO.</span>
-            <span class="hero__title2"><span data-i18n="hero.title2">Conquer the Ink Ocean.</span></span>
+            <span class="hero__title2">
+              <span data-i18n="hero.title2a">Conquer the</span>
+              <span class="grad-text" data-i18n="hero.title2b">Ink Ocean.</span>
+            </span>
           </h1>
-          <p class="hero__sub" data-i18n="hero.sub">Complete on-chain quests. Feed your Kraken. Watch the treasury swell — and let the FOMO crowd watch you.</p>
+
+          <p class="hero__sub" data-i18n="hero.sub">
+            Complete on-chain quests. Feed your Kraken. Watch the treasury swell — and let the FOMO crowd watch you.
+          </p>
+
           <div class="hero__cta">
-            <a href="app.html" class="btn btn--primary btn--lg" data-i18n="hero.cta1">Start Your Quest →</a>
+            <a href="app.html" class="btn btn--primary btn--lg">
+              <span data-i18n="hero.cta1">Start Your Quest</span>
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
             <a href="#how" class="btn btn--ghost btn--lg" data-i18n="hero.cta2">How It Works</a>
           </div>
-          <p class="hero__micro mono" data-i18n="hero.micro">No gas jitters · Quest Energy ~$0.02 shown upfront</p>
+
+          <p class="hero__micro" data-i18n="hero.micro">No gas jitters · Quest Energy ~$0.02 shown upfront</p>
         </div>
 
-        <!-- Kanan: kartu NFT mock -->
-        <div class="hero__right">
-          <div class="card-passport">
-            <div class="card-passport__head">
-              <span class="mono">🐙 INK PASSPORT</span>
-              <span class="badge badge--new" data-i18n="badge.new">NEW</span>
-            </div>
-            <div class="card-passport__art img-slot img-slot--art">
-              <span class="card-passport__wave" aria-hidden="true"></span>
-              <span class="img-slot__emoji img-slot__emoji--big">🐙</span>
-              <span class="img-slot__label">[IMG: passport-lv7]</span>
-            </div>
-            <div class="card-passport__name">
-              <span class="card-passport__id">KRAKEN #0421 — “Tentacle Tycoon”</span>
-              <span class="chip chip--cyan" data-i18n="passport.rank">TOP 8% OCEAN</span>
-            </div>
-            <div class="card-passport__xp">
-              <div class="progress"><div class="progress__fill" style="width:82%"></div></div>
-              <div class="card-passport__xp-meta mono">
-                <span>LV.7</span><span data-i18n="passport.xp">1,240 / 1,500 🪙</span>
+        <!-- Zona kanan 45%: kartu NFT mock -->
+        <div class="hero__visual" id="heroCard">
+          <article class="card-passport">
+            <!-- Chips mengambang (dekoratif) -->
+            <span class="chip chip--purple" aria-hidden="true">Lv.7 Kraken</span>
+            <span class="chip chip--gold" aria-hidden="true">+25 🪙</span>
+            <span class="chip chip--cyan" aria-hidden="true">Quest Complete <span class="chip__check">✓</span></span>
+
+            <header class="card-passport__header">
+              <span class="card-passport__brand">🐙 INK PASSPORT</span>
+              <span class="badge badge--new">NEW</span>
+            </header>
+
+            <div class="card-passport__arena">
+              <div class="img-slot img-slot--full" aria-hidden="true">
+                <span class="img-slot__emoji">🐙</span>
+                <span class="img-slot__label">[IMG: passport-lv7]</span>
               </div>
             </div>
-            <div class="card-passport__foot mono">
-              <span data-i18n="passport.chain">Chain: Ink L2</span><span>#0421</span>
+
+            <div class="card-passport__name">
+              <h3>KRAKEN #0421</h3>
+              <span class="rank-pill">TOP 8% OCEAN</span>
             </div>
 
-            <!-- Floating chips -->
-            <span class="chip chip--purple chip--float chip--pos1">Lv.7 Kraken</span>
-            <span class="chip chip--gold chip--float chip--pos2">+25 🪙</span>
-            <span class="chip chip--cyan chip--float chip--pos3" data-i18n="passport.chipdone">Quest Complete ✓</span>
-          </div>
-        </div>
-      </div>
-    </section>
+            <div class="card-passport__xp">
+              <span>LV.7</span>
+              <div class="progress" style="flex:1" aria-hidden="true">
+                <div class="progress__fill" style="width:82.7%"></div>
+              </div>
+              <span>1,240/1,500 🪙</span>
+            </div>
 
-    <!-- ============ 3. STATS STRIP ============ -->
-    <section class="stats" id="stats">
-      <div class="container stats__grid">
-        <div class="stat"><span class="stat__value" data-count="1200000" data-suffix=" 🪙">1.2M 🪙</span><span class="stat__label" data-i18n="stats.1">Total Rewards</span></div>
-        <div class="stat"><span class="stat__value" data-count="8412">8,412</span><span class="stat__label" data-i18n="stats.2">Players</span></div>
-        <div class="stat"><span class="stat__value" data-count="26730">26,730</span><span class="stat__label" data-i18n="stats.3">Quests Done</span></div>
-        <div class="stat"><span class="stat__value">~$0.02</span><span class="stat__label" data-i18n="stats.4">Avg. Fee</span></div>
-      </div>
-    </section>
-
-    <!-- ============ 4. HOW IT WORKS ============ -->
-    <section class="how section" id="how">
-      <div class="container">
-        <h2 class="section__title" data-i18n="how.title">Chart Your Course</h2>
-        <div class="how__grid">
-          <article class="how__step">
-            <span class="how__num">01</span>
-            <h3 data-i18n="how.s1.title">Connect</h3>
-            <p data-i18n="how.s1.desc">Plug in your wallet. Your Kraken stirs beneath the surface.</p>
-          </article>
-          <article class="how__step">
-            <span class="how__num">02</span>
-            <h3 data-i18n="how.s2.title">Quest</h3>
-            <p data-i18n="how.s2.desc">Swap, stake, bridge. Real on-chain deeds, real 🪙 points.</p>
-          </article>
-          <article class="how__step">
-            <span class="how__num">03</span>
-            <h3 data-i18n="how.s3.title">Evolve</h3>
-            <p data-i18n="how.s3.desc">Your Ink Passport levels up — and the treasury opens its jaws.</p>
+            <footer class="card-passport__footer">
+              <span>Chain: Ink L2</span>
+              <span>Minted: #0421</span>
+            </footer>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ 5. BENTO FEATURES ============ -->
-    <section class="features section" id="features">
-      <div class="container">
-        <h2 class="section__title" data-i18n="features.title">Weapons of the Deep</h2>
-        <div class="bento">
-          <article class="bento__card">
-            <span class="badge badge--soon" data-i18n="badge.soon">SOON</span>
-            <div class="bento__icon img-slot img-slot--icon"><span class="img-slot__emoji">🎒</span><span class="img-slot__label">[IMG: avatar-upload]</span></div>
-            <h3 data-i18n="feature.avatar.title">Custom Kraken Avatar</h3>
-            <p data-i18n="feature.avatar.desc">Upload your own Kraken. It becomes an NFT, pinned on IPFS.</p>
-          </article>
-          <article class="bento__card bento__card--big">
-            <span class="badge badge--new" data-i18n="badge.new">NEW</span>
-            <div class="bento__icon img-slot img-slot--icon"><span class="img-slot__emoji">🛂</span><span class="img-slot__label">[IMG: passport-lv7]</span></div>
-            <h3 data-i18n="feature.passport.title">Ink Passport</h3>
-            <p data-i18n="feature.passport.desc">A living NFT that evolves Lv.1 → Lv.10 as you grind quests.</p>
-          </article>
-          <article class="bento__card">
-            <span class="badge badge--popular" data-i18n="badge.popular">POPULAR</span>
-            <div class="bento__icon img-slot img-slot--icon"><span class="img-slot__emoji">🔁</span><span class="img-slot__label">[IMG: quest-icons]</span></div>
-            <h3 data-i18n="feature.quests.title">DeFi Quests</h3>
-            <p data-i18n="feature.quests.desc">Swap on Ink DEXes, stake INKQ, bridge to L2. Earn 🪙.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ 6. CTA TREASURY ============ -->
-    <section class="treasury section" id="treasury">
-      <div class="container">
-        <div class="treasury__banner">
-          <span class="treasury__ghost" aria-hidden="true">TREASURY</span>
-          <h2 data-i18n="treasury.title">The Treasure Vault Is Consuming 🪙</h2>
-          <p data-i18n="treasury.desc">A shared reward pool. The deeper your Passport level — the bigger your slice.</p>
-          <a href="app.html" class="btn btn--gold btn--lg" data-i18n="treasury.cta">Enter the Treasure Vault</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ 7. FEE STRIP ============ -->
-    <section class="fee" id="fee">
-      <div class="container fee__inner">
-        <span class="fee__bolt">⚡</span>
-        <p class="mono" data-i18n="fee.strip">Quest Energy ≈ $0.02 — always shown before you sign</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============ 8. FOOTER ============ -->
-  <footer class="footer">
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <span class="brand__mark img-slot img-slot--logo"><span class="img-slot__emoji">🐙</span><span class="img-slot__label">[IMG: logo-mark]</span></span>
-        <span class="brand__word">FOMO <span class="brand__ink">INK</span></span>
-        <p class="footer__tag" data-i18n="footer.tag">Don't FOMO. Conquer the Ink Ocean.</p>
-      </div>
-      <div class="footer__col">
-        <h4 data-i18n="footer.product">Product</h4>
-        <a href="app.html" data-i18n="nav.app">Quest App</a>
-        <a href="#features" data-i18n="footer.link.features">Features</a>
-        <a href="#fee" data-i18n="footer.link.fee">Quest Energy Fee</a>
-      </div>
-      <div class="footer__col">
-        <h4 data-i18n="footer.community">Community</h4>
-        <a href="https://x.com" target="_blank" rel="noopener">X / Twitter</a>
-        <a href="https://discord.com" target="_blank" rel="noopener">Discord</a>
-        <a href="https://telegram.org" target="_blank" rel="noopener">Telegram</a>
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-    <div class="container footer__bottom mono">
-      <span>© <span id="year">2026</span> FOMO INK</span>
-      <span data-i18n="footer.built">Built on Ink L2 · Optimism Superchain</span>
+  </section>
+
+  <!-- ================= 3. STATS STRIP ================= -->
+  <section class="stat-strip" id="stats" aria-label="Live stats">
+    <div class="container stat-strip__grid">
+      <div class="stat">
+        <div class="stat__value">1.2M 🪙</div>
+        <div class="stat__label mono" data-i18n="stats.1.label">Total Rewards</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">8,412</div>
+        <div class="stat__label mono" data-i18n="stats.2.label">Players</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">26,730</div>
+        <div class="stat__label mono" data-i18n="stats.3.label">Quests Done</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">$0.02</div>
+        <div class="stat__label mono" data-i18n="stats.4.label">Avg. Fee</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. 3 LANGKAH ================= -->
+  <section class="section" id="how">
+    <div class="container">
+      <h2 class="section__title" data-i18n="how.title">How It Works</h2>
+      <div class="steps__grid">
+        <article class="step">
+          <div class="step__num" aria-hidden="true">01</div>
+          <h3 class="step__title" data-i18n="how.s1.title">Connect</h3>
+          <p class="step__desc" data-i18n="how.s1.desc">Plug in your wallet and dock your Kraken at the Ink L2 harbor.</p>
+        </article>
+        <article class="step">
+          <div class="step__num" aria-hidden="true">02</div>
+          <h3 class="step__title" data-i18n="how.s2.title">Quest</h3>
+          <p class="step__desc" data-i18n="how.s2.desc">Complete on-chain quests — swap, stake, bridge. Earn 🪙 as XP.</p>
+        </article>
+        <article class="step">
+          <div class="step__num" aria-hidden="true">03</div>
+          <h3 class="step__title" data-i18n="how.s3.title">Evolve</h3>
+          <p class="step__desc" data-i18n="how.s3.desc">Hit milestones, evolve your Kraken, and claim your slice of the treasury.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5. BENTO FITUR ================= -->
+  <section class="section" id="features">
+    <div class="container">
+      <h2 class="section__title" data-i18n="features.title">Why Captains Choose FOMO INK</h2>
+      <div class="bento__grid">
+        <article class="bento__card">
+          <span class="badge badge--soon">SOON</span>
+          <span class="bento__icon" aria-hidden="true">🎨</span>
+          <h3 class="bento__title" data-i18n="feature.avatar.title">Custom Kraken Avatar</h3>
+          <p class="bento__desc" data-i18n="feature.avatar.desc">Mint your own Kraken look as an NFT on IPFS — then drop it into the ocean.</p>
+        </article>
+
+        <article class="bento__card bento__card--highlight">
+          <span class="badge badge--new">NEW</span>
+          <span class="bento__icon" aria-hidden="true">🪪</span>
+          <h3 class="bento__title" data-i18n="feature.passport.title">Ink Passport</h3>
+          <p class="bento__desc" data-i18n="feature.passport.desc">Your on-chain identity. Every 🪙 you earn is carved into its level — forever.</p>
+        </article>
+
+        <article class="bento__card">
+          <span class="badge badge--popular">POPULAR</span>
+          <span class="bento__icon" aria-hidden="true">🗺️</span>
+          <h3 class="bento__title" data-i18n="feature.quests.title">DeFi Quests</h3>
+          <p class="bento__desc" data-i18n="feature.quests.desc">Swap, stake, bridge. Real on-chain actions, real rewards — no fake farming.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6. CTA TREASURY ================= -->
+  <section class="section" id="treasury">
+    <div class="container">
+      <div class="treasury-banner">
+        <div>
+          <h2 data-i18n="treasury.title">The Treasury Swells. Your Slice Awaits.</h2>
+          <p data-i18n="treasury.sub">Every quest feeds the vault. Claim at Lv.10 — the deeper your level, the bigger your share of the ocean's gold.</p>
+        </div>
+        <a class="btn btn--primary btn--lg" href="app.html" data-i18n="treasury.cta">Enter the Treasure Vault</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 7. FEE STRIP ================= -->
+  <div class="fee-strip" id="fee" role="note">
+    ⚓ <span data-i18n="fee.strip">Quest Energy ≈ $0.02 — always shown before you sign. No gas jitters.</span>
+  </div>
+
+  <!-- ================= 8. FOOTER ================= -->
+  <footer class="site-footer" id="footer">
+    <span class="ghost-text" aria-hidden="true">FOMO</span>
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="logo" href="index.html">
+            <span class="logo__mark" aria-hidden="true">🐙</span>
+            <span class="logo__text">FOMO INK</span>
+          </a>
+          <p data-i18n="footer.tagline">Don't FOMO. Conquer the Ink Ocean. The GameFi tide on Ink L2 — feed your Kraken and watch the treasury swell.</p>
+        </div>
+
+        <div class="footer__col">
+          <h4 data-i18n="footer.product.title">Product</h4>
+          <a href="index.html" data-i18n="nav.home">Home</a>
+          <a href="app.html" data-i18n="nav.app">Quest App</a>
+          <a href="#features"><span data-i18n="feature.avatar.title">Custom Kraken Avatar</span> · SOON</a>
+        </div>
+
+        <div class="footer__col">
+          <h4 data-i18n="footer.resources.title">Resources</h4>
+          <a href="#" data-i18n="link.docs">Docs</a>
+          <a href="#" data-i18n="link.faq">FAQ</a>
+          <a href="#fee" data-i18n="link.energy">Quest Energy</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span data-i18n="footer.rights">© 2026 FOMO INK — All tides reserved.</span>
+        <span data-i18n="footer.built">⚓ Built on Ink L2</span>
+      </div>
     </div>
   </footer>
 
-  <!-- Urutan script: lang → i18n → page -->
+  <!-- Skrip: urutan WAJIB → lang → i18n → page -->
   <script src="lang-en.js"></script>
   <script src="lang-id.js"></script>
   <script src="lang-ptbr.js"></script>
